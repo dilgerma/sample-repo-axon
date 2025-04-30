@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component
 @Component
 class RoutesApi {
 
-    fun findRoutesForPickup(transportId: String): List<Route> {
-        // very simplified view, no transport legs, nothing
-        return listOf(Route("1", "munich", "glasgow"), Route("1", "munich", "eaglesham"))
-    }
+  fun findRoutesForPickup(transportId: String): List<Route> {
+    // very simplified view, no transport legs, nothing
+    return listOf(Route("1", "munich", "glasgow"), Route("1", "munich", "eaglesham"))
+  }
 }

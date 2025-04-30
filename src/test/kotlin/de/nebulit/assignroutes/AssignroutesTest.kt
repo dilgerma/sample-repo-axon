@@ -12,61 +12,53 @@ import org.axonframework.test.aggregate.FixtureConfiguration
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-
-/**
-
-
-Boardlink: https://miro.com/app/board/uXjVIE3QaOg=/?moveToWidget=3458764624633372560
- */
+/** Boardlink: https://miro.com/app/board/uXjVIE3QaOg=/?moveToWidget=3458764624633372560 */
 class AssignroutesTest {
 
-    private lateinit var fixture: FixtureConfiguration<TransportAggregate>
+  private lateinit var fixture: FixtureConfiguration<TransportAggregate>
 
-    @BeforeEach
-    fun setUp() {
-        fixture = AggregateTestFixture(TransportAggregate::class.java)
-    }
+  @BeforeEach
+  fun setUp() {
+    fixture = AggregateTestFixture(TransportAggregate::class.java)
+  }
 
-    @Test
-    fun `Assignroutes Test`() {
+  @Test
+  fun `Assignroutes Test`() {
 
-        var transportId: String = RandomData.newInstance<String> {}
+    var transportId: String = RandomData.newInstance<String> {}
 
-        //GIVEN
-        val events = mutableListOf<Event>()
+    // GIVEN
+    val events = mutableListOf<Event>()
 
-        events.add(RandomData.newInstance<PickupConfirmedEvent> {
-            this.transportId = transportId
-            consignee = RandomData.newInstance { }
-            freightForwarder = RandomData.newInstance { }
-            fromDate = RandomData.newInstance { }
-            goods = RandomData.newInstance { }
-            start = RandomData.newInstance { }
-            target = RandomData.newInstance { }
+    events.add(
+        RandomData.newInstance<PickupConfirmedEvent> {
+          this.transportId = transportId
+          consignee = RandomData.newInstance {}
+          freightForwarder = RandomData.newInstance {}
+          fromDate = RandomData.newInstance {}
+          goods = RandomData.newInstance {}
+          start = RandomData.newInstance {}
+          target = RandomData.newInstance {}
         })
 
+    val routes = listOf<Route>(RandomData.newInstance {})
+    // WHEN
+    val command = AssignRoutesCommand(routes = routes, transportId = transportId)
 
-        val routes = listOf<Route>(RandomData.newInstance {  })
-        //WHEN
-        val command = AssignRoutesCommand(
-            routes = routes,
-            transportId = transportId
-        )
+    // THEN
+    val expectedEvents = mutableListOf<Event>()
 
-        //THEN
-        val expectedEvents = mutableListOf<Event>()
-
-        expectedEvents.add(RandomData.newInstance<RouteAssignedEvent> {
-            this.transportId = command.transportId
-            this.route = routes[0]
-//this.Route = ...
+    expectedEvents.add(
+        RandomData.newInstance<RouteAssignedEvent> {
+          this.transportId = command.transportId
+          this.route = routes[0]
+          // this.Route = ...
         })
 
-
-        fixture.given(events)
-            .`when`(command)
-            .expectSuccessfulHandlerExecution()
-            .expectEvents(*expectedEvents.toTypedArray())
-    }
-
+    fixture
+        .given(events)
+        .`when`(command)
+        .expectSuccessfulHandlerExecution()
+        .expectEvents(*expectedEvents.toTypedArray())
+  }
 }

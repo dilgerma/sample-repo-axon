@@ -1,6 +1,587 @@
 {
   "slices": [
     {
+      "id": "3458764624631477393",
+      "status": "Created",
+      "title": "slice: Assign routes",
+      "context": "",
+      "commands": [
+        {
+          "id": "3458764624630607708",
+          "domain": "",
+          "modelContext": "Transport Planning",
+          "context": "INTERNAL",
+          "slice": "slice: Assign routes",
+          "title": "Assign routes",
+          "fields": [
+            {
+              "name": "transportId",
+              "type": "String",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": true,
+              "technicalAttribute": false
+            },
+            {
+              "name": "Routes",
+              "type": "Custom",
+              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "List",
+              "idAttribute": false,
+              "technicalAttribute": false
+            }
+          ],
+          "type": "COMMAND",
+          "description": "",
+          "aggregate": "Transport",
+          "aggregateDependencies": [
+            "Transport"
+          ],
+          "dependencies": [
+            {
+              "id": "3458764624630607722",
+              "type": "OUTBOUND",
+              "title": "Route Assigned",
+              "elementType": "EVENT"
+            },
+            {
+              "id": "3458764624630607704",
+              "type": "INBOUND",
+              "title": "automation",
+              "elementType": "AUTOMATION"
+            }
+          ],
+          "listElement": false,
+          "apiEndpoint": "",
+          "service": null,
+          "createsAggregate": false,
+          "prototype": {
+            "activeByDefault": false
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "3458764624630607722",
+          "domain": "",
+          "modelContext": "Transport Planning",
+          "context": "INTERNAL",
+          "slice": "slice: Assign routes",
+          "title": "Route Assigned",
+          "fields": [
+            {
+              "name": "transportId",
+              "type": "String",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": true,
+              "technicalAttribute": false
+            },
+            {
+              "name": "Route",
+              "type": "Custom",
+              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
+              "example": "",
+              "mapping": "Routes",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": false,
+              "technicalAttribute": false
+            }
+          ],
+          "type": "EVENT",
+          "description": "",
+          "aggregate": "Transport",
+          "aggregateDependencies": [
+            "Transport"
+          ],
+          "dependencies": [
+            {
+              "id": "3458764624630607712",
+              "type": "OUTBOUND",
+              "title": "Transport to create",
+              "elementType": "READMODEL"
+            },
+            {
+              "id": "3458764624630607708",
+              "type": "INBOUND",
+              "title": "Assign routes",
+              "elementType": "COMMAND"
+            }
+          ],
+          "listElement": false,
+          "apiEndpoint": "",
+          "service": null,
+          "createsAggregate": false,
+          "prototype": {
+            "activeByDefault": false
+          }
+        }
+      ],
+      "readmodels": [],
+      "screens": [],
+      "processors": [
+        {
+          "id": "3458764624630607704",
+          "groupId": "3458764624630607735",
+          "domain": "",
+          "modelContext": "Transport Planning",
+          "context": "INTERNAL",
+          "slice": "slice: Assign routes",
+          "title": "automation",
+          "fields": [
+            {
+              "name": "transportId",
+              "type": "String",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": true,
+              "technicalAttribute": false
+            },
+            {
+              "name": "Routes",
+              "type": "Custom",
+              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": true,
+              "cardinality": "List",
+              "idAttribute": false,
+              "technicalAttribute": false
+            }
+          ],
+          "type": "AUTOMATION",
+          "description": "",
+          "aggregate": "Transport",
+          "aggregateDependencies": [
+            "Transport"
+          ],
+          "dependencies": [
+            {
+              "id": "3458764624630607708",
+              "type": "OUTBOUND",
+              "title": "Assign routes",
+              "elementType": "COMMAND"
+            },
+            {
+              "id": "3458764624630607706",
+              "type": "INBOUND",
+              "title": "Pickup to confirm routes",
+              "elementType": "READMODEL"
+            }
+          ],
+          "listElement": false,
+          "apiEndpoint": "",
+          "service": null,
+          "createsAggregate": false,
+          "prototype": {
+            "activeByDefault": false
+          }
+        }
+      ],
+      "tables": [],
+      "specifications": [
+        {
+          "vertical": true,
+          "id": "3458764624633372560",
+          "sliceName": "slice: Assign routes",
+          "title": "spec: Assign routes",
+          "given": [
+            {
+              "title": "Pickup Confirmed",
+              "id": "3458764624633372570",
+              "index": 0,
+              "specRow": -1,
+              "type": "SPEC_EVENT",
+              "fields": [
+                {
+                  "name": "transportId",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": true,
+                  "cardinality": "Single",
+                  "idAttribute": true,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "consignee",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "freightForwarder",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "fromDate",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "Goods",
+                  "type": "Custom",
+                  "schema": "{\n    \"packagingId\":\"UUID\",\n    \"pallets\": [\n        {\n            \"handlingUnitId\":\"String\",\n            \"dimensions\": {\n                \"width\":\"Int\",\n                \"height\":\"Int\",\n                \"weight\":\"Double\"\n            }\n        }\n    ]\n}",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "start",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "target",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                }
+              ],
+              "linkedId": "3458764624630607721",
+              "expectEmptyList": false
+            }
+          ],
+          "when": [
+            {
+              "title": "Assign routes",
+              "id": "3458764624633372564",
+              "index": 0,
+              "specRow": -1,
+              "type": "SPEC_COMMAND",
+              "fields": [
+                {
+                  "name": "transportId",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": true,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "Routes",
+                  "type": "Custom",
+                  "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "List",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                }
+              ],
+              "linkedId": "3458764624630607708",
+              "expectEmptyList": false
+            }
+          ],
+          "then": [
+            {
+              "title": "Route Assigned",
+              "id": "3458764624633372567",
+              "index": 0,
+              "specRow": -1,
+              "type": "SPEC_EVENT",
+              "fields": [
+                {
+                  "name": "transportId",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": true,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "Route",
+                  "type": "Custom",
+                  "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
+                  "example": "",
+                  "mapping": "Routes",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                }
+              ],
+              "linkedId": "3458764624630607722",
+              "expectEmptyList": false
+            }
+          ],
+          "comments": []
+        }
+      ],
+      "actors": [],
+      "aggregates": [
+        "Transport"
+      ]
+    },
+    {
+      "id": "3458764624631477229",
+      "status": "Created",
+      "title": "slice: Pickup to confirm routes",
+      "context": "",
+      "commands": [],
+      "events": [],
+      "readmodels": [
+        {
+          "id": "3458764624630607706",
+          "domain": "",
+          "modelContext": "Transport Planning",
+          "context": "INTERNAL",
+          "slice": "slice: Pickup to confirm routes",
+          "title": "Pickup to confirm routes",
+          "fields": [
+            {
+              "name": "transportId",
+              "type": "String",
+              "schema": "",
+              "example": "",
+              "mapping": "",
+              "optional": false,
+              "generated": false,
+              "cardinality": "Single",
+              "idAttribute": true,
+              "technicalAttribute": false
+            }
+          ],
+          "type": "READMODEL",
+          "description": "",
+          "aggregate": "Transport",
+          "aggregateDependencies": [
+            "Transport"
+          ],
+          "dependencies": [
+            {
+              "id": "3458764624630607704",
+              "type": "OUTBOUND",
+              "title": "automation",
+              "elementType": "AUTOMATION"
+            },
+            {
+              "id": "3458764624630607721",
+              "type": "INBOUND",
+              "title": "Pickup Confirmed",
+              "elementType": "EVENT"
+            }
+          ],
+          "listElement": false,
+          "apiEndpoint": "",
+          "service": null,
+          "createsAggregate": false,
+          "prototype": {
+            "activeByDefault": false
+          }
+        }
+      ],
+      "screens": [],
+      "processors": [],
+      "tables": [],
+      "specifications": [
+        {
+          "vertical": true,
+          "id": "3458764626285167562",
+          "sliceName": "slice: Pickup to confirm routes",
+          "title": "spec: Pickup to confirm routes",
+          "given": [
+            {
+              "title": "Pickup Confirmed",
+              "id": "3458764626285167566",
+              "index": 0,
+              "specRow": -1,
+              "type": "SPEC_EVENT",
+              "fields": [
+                {
+                  "name": "transportId",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": true,
+                  "cardinality": "Single",
+                  "idAttribute": true,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "consignee",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "freightForwarder",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "fromDate",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "Goods",
+                  "type": "Custom",
+                  "schema": "{\n    \"packagingId\":\"UUID\",\n    \"pallets\": [\n        {\n            \"handlingUnitId\":\"String\",\n            \"dimensions\": {\n                \"width\":\"Int\",\n                \"height\":\"Int\",\n                \"weight\":\"Double\"\n            }\n        }\n    ]\n}",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "start",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                },
+                {
+                  "name": "target",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": false,
+                  "technicalAttribute": false
+                }
+              ],
+              "linkedId": "3458764624630607721",
+              "expectEmptyList": false
+            }
+          ],
+          "when": [],
+          "then": [
+            {
+              "title": "Pickup to confirm routes",
+              "id": "3458764626285167563",
+              "index": 0,
+              "specRow": -1,
+              "type": "SPEC_READMODEL",
+              "fields": [
+                {
+                  "name": "transportId",
+                  "type": "String",
+                  "schema": "",
+                  "example": "",
+                  "mapping": "",
+                  "optional": false,
+                  "generated": false,
+                  "cardinality": "Single",
+                  "idAttribute": true,
+                  "technicalAttribute": false
+                }
+              ],
+              "linkedId": "3458764624630607706",
+              "expectEmptyList": false
+            }
+          ],
+          "comments": []
+        }
+      ],
+      "actors": [],
+      "aggregates": [
+        "Transport"
+      ]
+    },
+    {
       "id": "3458764624631477066",
       "status": "Created",
       "title": "slice: Confirm Pickup",
@@ -365,456 +946,6 @@
       "aggregates": [
         "Transport"
       ]
-    },
-    {
-      "id": "3458764624631477393",
-      "status": "Created",
-      "title": "slice: Assign routes",
-      "context": "",
-      "commands": [
-        {
-          "id": "3458764624630607708",
-          "domain": "",
-          "modelContext": "Transport Planning",
-          "context": "INTERNAL",
-          "slice": "slice: Assign routes",
-          "title": "Assign routes",
-          "fields": [
-            {
-              "name": "Routes",
-              "type": "Custom",
-              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "generated": false,
-              "cardinality": "List",
-              "idAttribute": false,
-              "technicalAttribute": false
-            },
-            {
-              "name": "transportId",
-              "type": "String",
-              "schema": "",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "generated": false,
-              "cardinality": "Single",
-              "idAttribute": true,
-              "technicalAttribute": false
-            }
-          ],
-          "type": "COMMAND",
-          "description": "",
-          "aggregate": "Transport",
-          "aggregateDependencies": [
-            "Transport"
-          ],
-          "dependencies": [
-            {
-              "id": "3458764624630607722",
-              "type": "OUTBOUND",
-              "title": "Route Assigned",
-              "elementType": "EVENT"
-            },
-            {
-              "id": "3458764624630607704",
-              "type": "INBOUND",
-              "title": "automation",
-              "elementType": "AUTOMATION"
-            }
-          ],
-          "listElement": false,
-          "apiEndpoint": "",
-          "service": null,
-          "createsAggregate": false,
-          "prototype": {
-            "activeByDefault": false
-          }
-        }
-      ],
-      "events": [
-        {
-          "id": "3458764624630607722",
-          "domain": "",
-          "modelContext": "Transport Planning",
-          "context": "INTERNAL",
-          "slice": "slice: Assign routes",
-          "title": "Route Assigned",
-          "fields": [
-            {
-              "name": "transportId",
-              "type": "String",
-              "schema": "",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "generated": false,
-              "cardinality": "Single",
-              "idAttribute": true,
-              "technicalAttribute": false
-            },
-            {
-              "name": "Route",
-              "type": "Custom",
-              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
-              "example": "",
-              "mapping": "Routes",
-              "optional": false,
-              "generated": false,
-              "cardinality": "Single",
-              "idAttribute": false,
-              "technicalAttribute": false
-            }
-          ],
-          "type": "EVENT",
-          "description": "",
-          "aggregate": "Transport",
-          "aggregateDependencies": [
-            "Transport"
-          ],
-          "dependencies": [
-            {
-              "id": "3458764624630607712",
-              "type": "OUTBOUND",
-              "title": "Transport to create",
-              "elementType": "READMODEL"
-            },
-            {
-              "id": "3458764624630607708",
-              "type": "INBOUND",
-              "title": "Assign routes",
-              "elementType": "COMMAND"
-            }
-          ],
-          "listElement": false,
-          "apiEndpoint": "",
-          "service": null,
-          "createsAggregate": false,
-          "prototype": {
-            "activeByDefault": false
-          }
-        }
-      ],
-      "readmodels": [],
-      "screens": [],
-      "processors": [
-        {
-          "id": "3458764624630607704",
-          "groupId": "3458764624630607735",
-          "domain": "",
-          "modelContext": "Transport Planning",
-          "context": "INTERNAL",
-          "slice": "slice: Assign routes",
-          "title": "automation",
-          "fields": [
-            {
-              "name": "transportId",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "technicalAttribute": false,
-              "generated": false,
-              "idAttribute": true,
-              "type": "String",
-              "cardinality": "Single",
-              "schema": ""
-            },
-            {
-              "name": "Routes",
-              "type": "Custom",
-              "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "generated": true,
-              "cardinality": "List",
-              "idAttribute": false,
-              "technicalAttribute": false
-            }
-          ],
-          "type": "AUTOMATION",
-          "description": "",
-          "aggregate": "Transport",
-          "aggregateDependencies": [
-            "Transport"
-          ],
-          "dependencies": [
-            {
-              "id": "3458764624630607708",
-              "type": "OUTBOUND",
-              "title": "Assign routes",
-              "elementType": "COMMAND"
-            },
-            {
-              "id": "3458764624630607706",
-              "type": "INBOUND",
-              "title": "Pickup to confirm routes",
-              "elementType": "READMODEL"
-            }
-          ],
-          "listElement": false,
-          "apiEndpoint": "",
-          "service": null,
-          "createsAggregate": false,
-          "prototype": {
-            "activeByDefault": false
-          }
-        }
-      ],
-      "tables": [],
-      "specifications": [
-        {
-          "vertical": true,
-          "id": "3458764624633372560",
-          "sliceName": "slice: Assign routes",
-          "title": "spec: Assign routes",
-          "given": [
-            {
-              "title": "Pickup Confirmed",
-              "id": "3458764624633372570",
-              "index": 0,
-              "specRow": -1,
-              "type": "SPEC_EVENT",
-              "fields": [
-                {
-                  "name": "transportId",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": true,
-                  "cardinality": "Single",
-                  "idAttribute": true,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "consignee",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "freightForwarder",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "fromDate",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "Goods",
-                  "type": "Custom",
-                  "schema": "{\n    \"packagingId\":\"UUID\",\n    \"pallets\": [\n        {\n            \"handlingUnitId\":\"String\",\n            \"dimensions\": {\n                \"width\":\"Int\",\n                \"height\":\"Int\",\n                \"weight\":\"Double\"\n            }\n        }\n    ]\n}",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "start",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "target",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                }
-              ],
-              "linkedId": "3458764624630607721",
-              "expectEmptyList": false
-            }
-          ],
-          "when": [
-            {
-              "title": "Assign routes",
-              "id": "3458764624633372564",
-              "index": 0,
-              "specRow": -1,
-              "type": "SPEC_COMMAND",
-              "fields": [
-                {
-                  "name": "Routes",
-                  "type": "Custom",
-                  "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "List",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "transportId",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": true,
-                  "technicalAttribute": false
-                }
-              ],
-              "linkedId": "3458764624630607708",
-              "expectEmptyList": false
-            }
-          ],
-          "then": [
-            {
-              "title": "Route Assigned",
-              "id": "3458764624633372567",
-              "index": 0,
-              "specRow": -1,
-              "type": "SPEC_EVENT",
-              "fields": [
-                {
-                  "name": "transportId",
-                  "type": "String",
-                  "schema": "",
-                  "example": "",
-                  "mapping": "",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": true,
-                  "technicalAttribute": false
-                },
-                {
-                  "name": "Route",
-                  "type": "Custom",
-                  "schema": "{\n    \"RouteId\":\"String\",\n    \"from\":\"String\",\n    \"to\":\"String\"\n}",
-                  "example": "",
-                  "mapping": "Routes",
-                  "optional": false,
-                  "generated": false,
-                  "cardinality": "Single",
-                  "idAttribute": false,
-                  "technicalAttribute": false
-                }
-              ],
-              "linkedId": "3458764624630607722",
-              "expectEmptyList": false
-            }
-          ],
-          "comments": []
-        }
-      ],
-      "actors": [],
-      "aggregates": [
-        "Transport"
-      ]
-    },
-    {
-      "id": "3458764624631477229",
-      "status": "Created",
-      "title": "slice: Pickup to confirm routes",
-      "context": "",
-      "commands": [],
-      "events": [],
-      "readmodels": [
-        {
-          "id": "3458764624630607706",
-          "domain": "",
-          "modelContext": "Transport Planning",
-          "context": "INTERNAL",
-          "slice": "slice: Pickup to confirm routes",
-          "title": "Pickup to confirm routes",
-          "fields": [
-            {
-              "name": "transportId",
-              "example": "",
-              "mapping": "",
-              "optional": false,
-              "technicalAttribute": false,
-              "generated": false,
-              "idAttribute": true,
-              "type": "String",
-              "cardinality": "Single",
-              "schema": ""
-            }
-          ],
-          "type": "READMODEL",
-          "description": "",
-          "aggregate": "Transport",
-          "aggregateDependencies": [
-            "Transport"
-          ],
-          "dependencies": [
-            {
-              "id": "3458764624630607704",
-              "type": "OUTBOUND",
-              "title": "automation",
-              "elementType": "AUTOMATION"
-            },
-            {
-              "id": "3458764624630607721",
-              "type": "INBOUND",
-              "title": "Pickup Confirmed",
-              "elementType": "EVENT"
-            }
-          ],
-          "listElement": false,
-          "apiEndpoint": "",
-          "service": null,
-          "createsAggregate": false,
-          "prototype": {
-            "activeByDefault": false
-          }
-        }
-      ],
-      "screens": [],
-      "processors": [],
-      "tables": [],
-      "specifications": [],
-      "actors": [],
-      "aggregates": [
-        "Transport"
-      ]
     }
   ],
   "flows": [],
@@ -825,15 +956,15 @@
       "fields": [
         {
           "name": "transportId",
+          "type": "String",
+          "schema": "",
           "example": "",
           "mapping": "",
           "optional": false,
-          "technicalAttribute": false,
           "generated": false,
-          "idAttribute": true,
-          "type": "String",
           "cardinality": "Single",
-          "schema": ""
+          "idAttribute": true,
+          "technicalAttribute": false
         }
       ],
       "service": null,
